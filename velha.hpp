@@ -20,6 +20,11 @@ vector<vector<int>> parseHash()
     return hash;
 }
 
+
+/**
+ * Given a hash (3x3 matrix), returns a multidimensional array (as a vector) containing each
+ * valid trace of the game (i.e. columns, rows and diagonals)
+*/
 vector<vector<int>> getTraces(vector<vector<int>> hash)
 {
     vector<vector<int>> traces; // Initialize hash trays array
@@ -42,4 +47,57 @@ vector<vector<int>> getTraces(vector<vector<int>> hash)
     traces.push_back({hash[2][0], hash[1][1], hash[0][2]});
 
     return traces;
+}
+
+
+bool checkFull(vector<int> trace, int type) {
+    return (trace[0] == type) && (trace[1] == type) && (trace[2] == type);
+}
+
+
+/**
+ * Iterate over hash traces to check game status, checking the following conditions:
+ * - If one and only one trace is full with crosses or circles, then we have a winner
+ * - If one trace is empty and it wasn't found traces full with crosses or circles, the game is undefined
+ * - If there is no full traces, the game is a tie
+ * 
+ *  Otherwise, the game is invalid
+*/
+int validateTicTacToe(vector<vector<int>> hash)
+{
+    vector<vector<int>> traces = getTraces(hash);
+    int fullCross = 0, fullCircle = 0, fullBlank = 0;
+
+    // Iteration over traces
+    for (int i = 0; i < (int) traces.size(); i++) {
+        if (checkFull(traces[i], 1)) {
+            fullCross++;
+        }
+
+        if (checkFull(traces[i], 2)) {
+            fullCircle++;
+        }
+
+        if (checkFull(traces[i], 0)) {
+            fullBlank++;
+        }
+    }
+
+    if (fullCross == 1 || fullCircle == 1) { // Winner condition
+        if (fullCross == 1 && fullCircle == 0) {
+            return 1;
+        }
+
+        if (fullCircle == 1 && fullCross == 0) {
+            return 2;
+        }
+
+        return -2; // Two winners is invalid
+    } else if (fullBlank > 1 && (fullCircle == 0 || fullCross == 0)) { // No winners
+        return -1;
+    } else if (fullBlank == 0 && fullCircle == 0 && fullCross == 0) { // Tie
+        return 0;
+    } else {
+        return -2; // Invalid game
+    }
 }
