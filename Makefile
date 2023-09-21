@@ -14,7 +14,7 @@ run : valida_velha
 
 test : teste_velha.cpp
 	cmake -S . -B test_files && cmake --build test_files && \
-	cd test_files && ctest
+	cd test_files && ctest || rm -rf test_files
 
 cpplint : teste_velha.cpp velha.cpp velha.hpp
 	cpplint *.*
