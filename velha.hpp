@@ -1,23 +1,40 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <string>
+#include <algorithm>
+#include <fstream>
 
 #ifndef VELHA_HPP_
 #define VELHA_HPP_
 
 using std::vector;
+using std::string;
 using std::cin;
+using std::getline;
+using std::remove;
 
 /**
- * Get user's input and return a 3x3 matrix representing the game's hash
+ * Get user's input (or from a text file) and return a 3x3 matrix representing the game's hash
 */
-vector<vector<int>> parseHash() {
+vector<vector<int>> parseHash(std::istream& file = cin) {
     vector<vector<int>> hash(3);
 
-    int a;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3 && cin >> a; j++) {
-            hash[i].push_back(a);
+    if (&file == &cin) {
+        int a;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3 && cin >> a; j++) {
+                hash[i].push_back(a);
+            }
+        }
+    } else {
+        for (int i = 0; i < 3; i++) {
+            string line;
+            getline(file, line);
+            line.erase(remove(line.begin(), line.end(), ' '), line.end());
+            for (int j = 0; j < 3; j++) {
+                hash[i].push_back(line[j] - '0');
+            }
         }
     }
 
