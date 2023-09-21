@@ -1,22 +1,26 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-using namespace std;
+
+#ifndef VELHA_HPP_
+#define VELHA_HPP_
+
+using std::vector;
+using std::cin;
 
 /**
  * Get user's input and return a 3x3 matrix representing the game's hash
 */
-vector<vector<int>> parseHash()
-{
+vector<vector<int>> parseHash() {
     vector<vector<int>> hash(3);
 
     int a;
     for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3 && cin >> a; j++){
+        for (int j = 0; j < 3 && cin >> a; j++) {
             hash[i].push_back(a);
         }
     }
-    
+
     return hash;
 }
 
@@ -25,18 +29,18 @@ vector<vector<int>> parseHash()
  * Given a hash (3x3 matrix), returns a multidimensional array (as a vector) containing each
  * valid trace of the game (i.e. columns, rows and diagonals)
 */
-vector<vector<int>> getTraces(vector<vector<int>> hash)
-{
-    vector<vector<int>> traces; // Initialize hash trays array
-    int cross = 0, circle = 0;
+vector<vector<int>> getTraces(vector<vector<int>> hash) {
+    // Initialize hash trays array
+    vector<vector<int>> traces;
 
-    
     for (int i = 0; i < 3; i++) {
-        traces.push_back(hash[i]); // Get rows
+        // Get rows
+        traces.push_back(hash[i]);
 
         vector<int> trace;
         for (int j = 0; j < 3; j++) {
-            trace.push_back(hash[j][i]); // Get columns
+            // Get columns
+            trace.push_back(hash[j][i]);
         }
 
         traces.push_back(trace);
@@ -63,13 +67,12 @@ bool checkFull(vector<int> trace, int type) {
  * 
  *  Otherwise, the game is invalid
 */
-int validateTicTacToe(vector<vector<int>> hash)
-{
+int validateTicTacToe(vector<vector<int>> hash) {
     vector<vector<int>> traces = getTraces(hash);
     int fullCross = 0, fullCircle = 0, fullBlank = 0;
 
     // Iteration over traces
-    for (int i = 0; i < (int) traces.size(); i++) {
+    for (int i = 0; i < static_cast<int>(traces.size()); i++) {
         if (checkFull(traces[i], 1)) {
             fullCross++;
         }
@@ -83,7 +86,8 @@ int validateTicTacToe(vector<vector<int>> hash)
         }
     }
 
-    if (fullCross == 1 || fullCircle == 1) { // Winner condition
+    // Winner condition
+    if (fullCross == 1 || fullCircle == 1) {
         if (fullCross == 1 && fullCircle == 0) {
             return 1;
         }
@@ -92,12 +96,18 @@ int validateTicTacToe(vector<vector<int>> hash)
             return 2;
         }
 
-        return -2; // Two winners is invalid
-    } else if (fullBlank > 1 && (fullCircle == 0 || fullCross == 0)) { // No winners
+        // Two winners is invalid
+        return -2;
+
+    // No winners
+    } else if (fullBlank > 1 && (fullCircle == 0 || fullCross == 0)) {
         return -1;
-    } else if (fullBlank == 0 && fullCircle == 0 && fullCross == 0) { // Tie
+    // Tie
+    } else if (fullBlank == 0 && fullCircle == 0 && fullCross == 0) {
         return 0;
+    // Invalid game
     } else {
-        return -2; // Invalid game
+        return -2;
     }
 }
+#endif  // VELHA_HPP_

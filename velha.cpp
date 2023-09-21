@@ -1,14 +1,13 @@
 #include <vector>
-#include "velha.hpp"
+#include "./velha.hpp"
 
+using std::cout;
 
-int main()
-{
+int main() {
     vector<vector<int>> game = parseHash();
     int res = validateTicTacToe(game);
-    
-    switch (res)
-    {
+
+    switch (res) {
     case 2:
         cout << "Circles wins!";
         break;

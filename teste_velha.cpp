@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "velha.hpp"
+#include "./velha.hpp"
 
 vector<vector<int>> matrixRef {
     {1, 2, 2},
@@ -10,14 +10,14 @@ vector<vector<int>> matrixRef {
 };
 
 vector<vector<int>> matrixRefTraces {
-  {1,2,2},
-  {1,2,1},
-  {2,0,1},
-  {2,0,2},
-  {1,2,0},
-  {2,1,0},
-  {1,0,0},
-  {1,0,2}
+  {1, 2, 2},
+  {1, 2, 1},
+  {2, 0, 1},
+  {2, 0, 2},
+  {1, 2, 0},
+  {2, 1, 0},
+  {1, 0, 0},
+  {1, 0, 2}
 };
 
 TEST(Input, ParseMatrixHashFromUserInput) {
@@ -29,16 +29,17 @@ TEST(GameValidation, GetTracesFromMatrix) {
 }
 
 TEST(GameValidation, CheckFullTracesDetection) {
-    EXPECT_TRUE(checkFull({0,0,0}, 0));
-    EXPECT_TRUE(checkFull({1,1,1}, 1));
-    EXPECT_TRUE(checkFull({2,2,2}, 2));
-    EXPECT_FALSE(checkFull({2,1,2}, 1));
-    EXPECT_FALSE(checkFull({0,2,1}, 2));
-    EXPECT_FALSE(checkFull({0,0,1}, 0));
+    EXPECT_TRUE(checkFull({0, 0, 0}, 0));
+    EXPECT_TRUE(checkFull({1, 1, 1}, 1));
+    EXPECT_TRUE(checkFull({2, 2, 2}, 2));
+    EXPECT_FALSE(checkFull({2, 1, 2}, 1));
+    EXPECT_FALSE(checkFull({0, 2, 1}, 2));
+    EXPECT_FALSE(checkFull({0, 0, 1}, 0));
 }
 
 TEST(GameValidation, ValidateGame) {
-  vector<vector<int>> crossWins, circleWins, tieGame, undefinedGame, invalidGame;
+  vector<vector<int>> crossWins, circleWins, tieGame,
+                      undefinedGame, invalidGame;
 
   crossWins = {
     {1, 2, 1},
