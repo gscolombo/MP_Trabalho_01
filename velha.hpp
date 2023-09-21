@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
+#include <utility>
 using namespace std;
 
 /**
@@ -18,4 +18,28 @@ vector<vector<int>> parseHash()
     }
     
     return hash;
+}
+
+vector<vector<int>> getTraces(vector<vector<int>> hash)
+{
+    vector<vector<int>> traces; // Initialize hash trays array
+    int cross = 0, circle = 0;
+
+    
+    for (int i = 0; i < 3; i++) {
+        traces.push_back(hash[i]); // Get rows
+
+        vector<int> trace;
+        for (int j = 0; j < 3; j++) {
+            trace.push_back(hash[j][i]); // Get columns
+        }
+
+        traces.push_back(trace);
+    }
+
+    // Get diagonals
+    traces.push_back({hash[0][0], hash[1][1], hash[2][2]});
+    traces.push_back({hash[2][0], hash[1][1], hash[0][2]});
+
+    return traces;
 }
