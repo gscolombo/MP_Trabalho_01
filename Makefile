@@ -1,3 +1,8 @@
+all: velha.cpp velha.hpp velha.o
+	g++ -std=c++11 -Wall -c velha.cpp
+	g++ -std=c++11 -Wall velha.o -o valida_velha
+	./valida_velha
+
 valida_velha : velha.cpp velha.hpp
 	g++ -std=c++11 -Wall velha.o -o valida_velha
 
@@ -15,4 +20,4 @@ cpplint : teste_velha.cpp velha.cpp velha.hpp
 	cpplint *.*
 
 clean :
-	rm -rf *.o testa_velha test_files
+	rm -rf *.o valida_velha test_files
