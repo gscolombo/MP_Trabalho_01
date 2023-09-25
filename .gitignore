@@ -3,3 +3,5 @@ test_files
 coverage/*/
 *.gc*
 *.o
+valida_velha
+valgrind*
