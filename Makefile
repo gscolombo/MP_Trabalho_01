@@ -26,13 +26,13 @@ cpplint : teste_velha.cpp velha.cpp velha.hpp
 	cpplint *.*
 
 gcov : teste_velha.cpp velha.cpp velha.hpp
-	rm -r ./coverage/annotations
+	rm -r -f ./coverage/annotations
 	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage -c velha.cpp
 	cd coverage && cmake -S . -B build && cmake --build build
-	./coverage/build/teste_valida_velha
+	./coverage/build/testa_valida_velha
 	gcov *.cpp
 	mkdir ./coverage/annotations && mv *.gc* ./coverage/annotations
-	gcovr --exclude '.*googletest.*' --html coverage/coverage.html # Generates coverage reports
+	gcovr --exclude '.*googletest.*' --exclude '.*velha.cpp.*' --html coverage/coverage.html # Generates coverage reports
 	open coverage/coverage.html
 	rm *.o
 
@@ -47,4 +47,4 @@ debug : velha.cpp velha.hpp
 	gdb valida_velha
 
 clean :
-	rm -rf *.o *.gc* valida_velha test_files coverage/build valgrind.*
+	rm -rf *.o *.gc* valida_velha test_files coverage/build coverage/annotations coverage/*.html valgrind.*
