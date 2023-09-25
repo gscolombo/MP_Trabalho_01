@@ -41,5 +41,10 @@ valgrind : velha.cpp velha.hpp velha.o valida_velha
 	g++ -std=c++11 -Wall velha.o -o valida_velha
 	valgrind --leak-check=yes --log-file=valgrind.rpt -s ./valida_velha
 
+debug : velha.cpp velha.hpp
+	g++ -std=c++11 -Wall -c velha.cpp
+	g++ -std=c++11 -Wall velha.o -o valida_velha
+	gdb valida_velha
+
 clean :
 	rm -rf *.o *.gc* valida_velha test_files coverage/build
