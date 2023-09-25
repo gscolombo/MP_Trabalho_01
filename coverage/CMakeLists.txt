@@ -20,7 +20,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -fprofile-arcs -ftest-c
 enable_testing()
 
 add_executable(
-  valida_velha
+  testa_valida_velha
   ../teste_velha.cpp 
   ../velha.gcno
 )

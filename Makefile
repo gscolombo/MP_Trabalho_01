@@ -29,7 +29,7 @@ gcov : teste_velha.cpp velha.cpp velha.hpp
 	rm -r ./coverage/annotations
 	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage -c velha.cpp
 	cd coverage && cmake -S . -B build && cmake --build build
-	./coverage/build/valida_velha
+	./coverage/build/teste_valida_velha
 	gcov *.cpp
 	mkdir ./coverage/annotations && mv *.gc* ./coverage/annotations
 	gcovr --exclude '.*googletest.*' --html coverage/coverage.html # Generates coverage reports
