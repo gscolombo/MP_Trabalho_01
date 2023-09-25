@@ -22,12 +22,13 @@ vector<vector<int>> matrixRefTraces {
 };
 
 TEST(Input, ParseMatrixHashFromUserInput) {
-  std::ifstream inputFile("../test_assets/text_input.txt");
+  std::ifstream inputFile("test_assets/text_input.txt");
+
   if (inputFile.is_open()) {
     EXPECT_EQ(parseHash(inputFile), matrixRef);
     inputFile.close();
-  } {
-    FAIL();
+  } else {
+    ADD_FAILURE();
   }
 }
 
