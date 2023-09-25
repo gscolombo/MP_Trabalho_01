@@ -127,4 +127,19 @@ int validateTicTacToe(vector<vector<int>> hash) {
         return -2;
     }
 }
+
+std::string outputResult(int res) {
+    switch (res) {
+    case 2:
+        return "\nCircles wins!\n";
+    case 1:
+        return "\nCrosses wins!\n";
+    case 0:
+        return "\nGame tied!\n";
+    case -1:
+        return "\nNo winners yet\n";
+    default:
+        return "\nGame is invalid!\n";
+    }
+}
 #endif  // VELHA_HPP_
