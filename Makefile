@@ -47,4 +47,4 @@ debug : velha.cpp velha.hpp
 	gdb valida_velha
 
 clean :
-	rm -rf *.o *.gc* valida_velha test_files coverage/build
+	rm -rf *.o *.gc* valida_velha test_files coverage/build valgrind.*
