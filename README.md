@@ -22,5 +22,5 @@ Esse projeto é um trabalho da disciplina de Métodos de Programação (CIC0234)
     gcov : Realiza e apresenta (em um HTML) a cobertura de testes com o gcov e gcovr
     valgrind : Executa o verificar dinâmico Valgrind no programa compilado
     debug : Executa o programa compilado com o gdb
-    clean : Apaga os arquivos criados e reinicia o diretório para o estado inicial
+    clean : Apaga os arquivos criados e reinicia o diretório-raiz para o estado inicial
 ```
