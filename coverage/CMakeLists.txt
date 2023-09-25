@@ -26,9 +26,9 @@ add_executable(
 )
 
 target_link_libraries(
-  valida_velha
+  testa_valida_velha
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(valida_velha)
+gtest_discover_tests(testa_valida_velha)
