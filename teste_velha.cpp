@@ -21,6 +21,33 @@ vector<vector<int>> matrixRefTraces {
   {1, 0, 2}
 };
 
+vector<vector<int>>
+crossWins = {
+  {1, 2, 1},
+  {1, 1, 2},
+  {2, 2, 1}
+},
+circleWins = {
+  {1, 2, 1},
+  {1, 1, 2},
+  {2, 2, 2}
+},
+tieGame = {
+  {1, 2, 1},
+  {2, 2, 1},
+  {1, 1, 2}
+},
+undefinedGame = {
+  {1, 0, 0},
+  {0, 0, 2},
+  {0, 0, 0}
+},
+invalidGame = {
+  {1, 1, 1},
+  {0, 0, 0},
+  {2, 2, 2}
+};
+
 TEST(Input, ParseMatrixHashFromUserInput) {
   std::ifstream inputFile("test_assets/text_input.txt");
 
@@ -46,42 +73,22 @@ TEST(GameValidation, CheckFullTracesDetection) {
 }
 
 TEST(GameValidation, ValidateGame) {
-  vector<vector<int>> crossWins, circleWins, tieGame,
-                      undefinedGame, invalidGame;
-
-  crossWins = {
-    {1, 2, 1},
-    {1, 1, 2},
-    {2, 2, 1}
-  };
-
-  circleWins = {
-    {1, 2, 1},
-    {1, 1, 2},
-    {2, 2, 2}
-  };
-
-  tieGame = {
-    {1, 2, 1},
-    {2, 2, 1},
-    {1, 1, 2}
-  };
-
-  undefinedGame = {
-    {1, 0, 0},
-    {0, 0, 2},
-    {0, 0, 0}
-  };
-
-  invalidGame = {
-    {1, 1, 1},
-    {0, 0, 0},
-    {2, 2, 2}
-  };
-
   EXPECT_EQ(validateTicTacToe(crossWins), 1);
   EXPECT_EQ(validateTicTacToe(circleWins), 2);
   EXPECT_EQ(validateTicTacToe(tieGame), 0);
   EXPECT_EQ(validateTicTacToe(undefinedGame), -1);
   EXPECT_EQ(validateTicTacToe(invalidGame), -2);
+}
+
+TEST(ProgramExecution, OutputGameResult) {
+  EXPECT_EQ(outputResult(validateTicTacToe(crossWins)),
+                          "\nCrosses wins!\n");
+  EXPECT_EQ(outputResult(validateTicTacToe(circleWins)),
+                          "\nCircles wins!\n");
+  EXPECT_EQ(outputResult(validateTicTacToe(tieGame)),
+                          "\nGame tied!\n");
+  EXPECT_EQ(outputResult(validateTicTacToe(undefinedGame)),
+                          "\nNo winners yet\n");
+  EXPECT_EQ(outputResult(validateTicTacToe(invalidGame)),
+                          "\nGame is invalid!\n");
 }
